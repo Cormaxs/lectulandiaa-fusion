@@ -4,7 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import BookCard from './BookCard';
 import styles from '../../styles/BookCarousel.module.css';
 
-const BookCarousel = ({ books, title, isLoading }) => {
+const BookCarousel = ({ books, title, isLoading, onEdit, onDelete }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
@@ -81,7 +81,7 @@ const BookCarousel = ({ books, title, isLoading }) => {
           <div className={styles.emblaContainer}>
             {books.map((book) => (
               <div key={book._id} className={styles.emblaSlide}>
-                <BookCard book={book} />
+                <BookCard book={book} onEdit={onEdit} onDelete={onDelete} />
               </div>
             ))}
           </div>

@@ -21,7 +21,7 @@ export default function Login() {
     if (typeof window === 'undefined') return;
 
     // Extraer token y user de la respuesta anidada
-    const { token, user } = responseData.user;
+    const { token, user } = responseData;
     
     if (!token) {
       throw new Error('Token no recibido del servidor.');

@@ -16,6 +16,11 @@ const buildSearchParams = ({ q, page, limit, idioma, anio, fileType, autor, isPr
   return params.toString();
 };
 
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+};
+
 export const fetchBooks = async ({ q = '', page = 1, limit = 12, idioma, anio, fileType, autor, isPremium, categorias } = {}) => {
   try {
     const queryString = buildSearchParams({ q, page, limit, idioma, anio, fileType, autor, isPremium, categorias });
@@ -41,3 +46,37 @@ export const fetchBookById = async (slugOrId) => {
     throw new Error('Error de conexión al obtener el libro.');
   }
 };
+
+export const createBook = async (bookData) => {
+  try {
+    const response = await api.post('/books', bookData, getAuthHeaders());
+    return response.data;
+  } catch (error) {
+    const message = error.response?.data?.message || 'Error al crear el libro.';
+    console.error('Error en createBook:', error);
+    throw new Error(message);
+  }
+};
+
+export const updateBook = async (idBook, bookData) => {
+  try {
+    const response = await api.post(`/books/${idBook}`, bookData, getAuthHeaders());
+    return response.data;
+  } catch (error) {
+    const message = error.response?.data?.message || 'Error al actualizar el libro.';
+    console.error('Error en updateBook:', error);
+    throw new Error(message);
+  }
+};
+
+export const deleteBook = async (idBook) => {
+  try {
+    const response = await api.delete(`/books/${idBook}`, getAuthHeaders());
+    return response.data;
+  } catch (error) {
+    const message = error.response?.data?.message || 'Error al eliminar el libro.';
+    console.error('Error en deleteBook:', error);
+    throw new Error(message);
+  }
+};
+

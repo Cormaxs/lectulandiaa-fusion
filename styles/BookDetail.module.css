@@ -292,6 +292,67 @@
 }
 
 /* ============================================
+   SECCIÓN DE CALIFICACIÓN
+   ============================================ */
+.ratingSection {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eaeaea;
+  text-align: center;
+}
+
+.ratingSection h2 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.ratingSection p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.starsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-bottom: 1rem;
+}
+
+.star {
+  font-size: 2rem;
+  color: #ccc; /* Color de estrella vacía */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.star:hover {
+  color: #f5b342; /* Color al pasar el ratón */
+}
+
+.star.filledStar {
+  color: #f5b342; /* Color de estrella llena */
+}
+
+.star.disabledStar {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.successMessage {
+  color: #28a745;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+.errorMessage {
+  color: #dc3545;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 850px) {
@@ -340,4 +401,45 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ============================================
+   ADMIN ACTIONS EN DETALLE DE LIBRO
+   ============================================ */
+.adminActionsDetail {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eaeaea;
+}
+
+.editButtonDetail,
+.deleteButtonDetail {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.editButtonDetail {
+  background-color: #ffc107; /* Amarillo */
+  color: #333;
+}
+
+.editButtonDetail:hover {
+  background-color: #e0a800;
+}
+
+.deleteButtonDetail {
+  background-color: #dc3545; /* Rojo */
+}
+
+.deleteButtonDetail:hover {
+  background-color: #c82333;
 }

@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import BookCard from './BookCard';
 import styles from '../../styles/BookGrid.module.css';
 
-const BookGrid = memo(({ books, isLoading }) => {
+const BookGrid = memo(({ books, isLoading, onEdit, onDelete }) => {
   return (
     <div
       id="books-grid"
@@ -11,7 +11,7 @@ const BookGrid = memo(({ books, isLoading }) => {
     >
       {books.length > 0 ? (
         books.map((book) => (
-          <BookCard key={book._id} book={book} />
+          <BookCard key={book._id} book={book} onEdit={onEdit} onDelete={onDelete} />
         ))
       ) : (
         <p className={styles.noResults}>

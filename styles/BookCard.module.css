@@ -173,3 +173,50 @@
     font-size: 0.65rem;
   }
 }
+
+/* ============================================
+   ADMIN ACTIONS
+   ============================================ */
+.bookCardContainer {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.adminActions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 5px;
+  z-index: 15; /* Asegura que estén por encima de otros elementos */
+}
+
+.adminActions button {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 1rem;
+  color: #fff;
+  backdrop-filter: blur(4px);
+}
+
+.adminActions button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.editButton {
+  color: #ffc107; /* Amarillo */
+}
+
+.deleteButton {
+  color: #dc3545; /* Rojo */
+}
