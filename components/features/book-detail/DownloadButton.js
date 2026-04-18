@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import styles from '../../../styles/BookDetail.module.css';
 
-const DownloadButton = ({ book }) => {
+const DownloadButton = memo(({ book }) => {
     if (!book.link) return null;
 
     return (
@@ -18,6 +19,8 @@ const DownloadButton = ({ book }) => {
             )}
         </div>
     );
-};
+});
+
+DownloadButton.displayName = 'DownloadButton';
 
 export default DownloadButton;

@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
+import { useCallback, memo } from 'react';
 import styles from '../../../styles/BookDetail.module.css';
 
-const BackLink = () => {
+const BackLink = memo(() => {
     const router = useRouter();
 
-    const handleBack = (e) => {
+    const handleBack = useCallback((e) => {
         e.preventDefault();
         // Verifica si hay historial previo para evitar cerrar la pestaña si entró directo
         if (window.history.length > 1) {
@@ -12,7 +13,7 @@ const BackLink = () => {
         } else {
             router.push('/explore'); // Fallback por si entró por un link directo
         }
-    };
+    }, [router]);
 
     return (
         <button 
@@ -23,6 +24,8 @@ const BackLink = () => {
             &larr; Volver
         </button>
     );
-};
+});
+
+BackLink.displayName = 'BackLink';
 
 export default BackLink;

@@ -1,13 +1,13 @@
 // components/features/SearchBar.js
 
 import { useRouter } from 'next/router';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import styles from '../../styles/SearchBar.module.css';
 
 // ⭐️ CONSTANTE CLAVE para Session Storage
 const PAGE_STORAGE_KEY = 'last_catalog_page';
 
-const SearchBar = ({ initialQuery }) => {
+const SearchBar = memo(({ initialQuery }) => {
     const router = useRouter();
     const [query, setQuery] = useState(initialQuery);
 
@@ -60,6 +60,7 @@ const SearchBar = ({ initialQuery }) => {
             >
                 <input
                     type="text"
+                    id="search-input" // Añadido id para accesibilidad
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Buscar por título, autor o ISBN..."
@@ -87,6 +88,8 @@ const SearchBar = ({ initialQuery }) => {
             </form>
         </div>
     );
-};
+});
+
+SearchBar.displayName = 'SearchBar';
 
 export default SearchBar;

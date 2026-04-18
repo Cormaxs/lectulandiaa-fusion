@@ -60,4 +60,6 @@ const Pagination = memo(({ currentPage, totalPages, currentQuery, isLoading, bas
     );
 });
 
+Pagination.displayName = 'Pagination';
+
 export default Pagination;

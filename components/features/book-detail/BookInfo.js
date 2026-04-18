@@ -62,4 +62,6 @@ const BookInfo = memo(({ book }) => {
   );
 });
 
+BookInfo.displayName = 'BookInfo';
+
 export default BookInfo;

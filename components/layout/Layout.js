@@ -2,8 +2,9 @@
 
 import Header from './Header';
 import Footer from './Footer';
+import { memo } from 'react';
 
-export default function Layout({ children }) {
+function Layout({ children }) {
     return (
         <div className="page-shell">
             <Header />
@@ -26,3 +27,5 @@ export default function Layout({ children }) {
         </div>
     );
 }
+
+export default memo(Layout);
