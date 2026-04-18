@@ -1,0 +1,54 @@
+/* ============================================
+   BookGrid.module.css
+   Grid con tarjetas idénticas al carrusel (HBO/Disney+)
+   ============================================ */
+
+.booksGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 4%;
+  transition: opacity 0.3s ease;
+}
+
+/* Estado de carga */
+.booksGrid.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* Mensaje cuando no hay resultados */
+.noResults {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 60px 20px;
+  color: #b0b0b0;
+  background-color: #0f0f0f;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* ============================================
+   Ajustes responsivos (coherentes con carrusel)
+   ============================================ */
+@media (max-width: 768px) {
+  .booksGrid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 150px));
+    gap: 16px;
+    padding: 16px 3%;
+  }
+}
+
+@media (max-width: 480px) {
+  .booksGrid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 130px));
+    gap: 14px;
+    padding: 16px 12px;
+  }
+}

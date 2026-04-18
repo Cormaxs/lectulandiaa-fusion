@@ -1,0 +1,81 @@
+/* styles/Pagination.module.css */
+
+.paginationContainer {
+    margin-top: 80px;
+    text-align: center;
+    padding: 25px 0;
+    border-top: 1px solid #333; /* Borde de separación sutil */
+}
+
+.paginationLink {
+    margin: 0 5px;
+    padding: 8px 13px;
+    border: 1px solid #333;
+    background-color: #1e1e1e;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #e5e5e5;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    display: inline-block;
+    min-width: 30px;
+    text-align: center;
+}
+
+.paginationLink.navigation {
+    padding: 8px 15px;
+    min-width: 80px;
+    font-weight: 400;
+    background-color: #333;
+    border-color: #333;
+}
+
+.paginationLink:hover {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #fff;
+}
+
+.paginationLink.current {
+    background-color: #fa6a1e; /* Rojo de enfoque */
+    color: white;
+    font-weight: 600;
+    border-color: #fa6a1e;
+}
+
+.paginationLink.current:hover {
+    background-color: #fa6413;
+    color: white;
+}
+
+.paginationLink.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    color: #888;
+    background-color: #1e1e1e;
+}
+
+.paginationLink.loadingLink {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.ellipsis {
+    margin: 0 5px;
+    padding: 8px 0;
+    color: #888;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .paginationLink.navigation {
+        min-width: 40px;
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+}

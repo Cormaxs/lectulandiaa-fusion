@@ -1,0 +1,144 @@
+/* ============================================
+   SearchBar.module.css
+   Estilo HBO/Disney+ para barra de búsqueda
+   ============================================ */
+
+.searchBarWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0 4%;
+  margin: 1.5rem 0 1rem;
+}
+
+.searchForm {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  max-width: 720px;
+  width: 100%;
+  background: transparent;
+}
+
+/* Input de búsqueda */
+.searchInput {
+  flex: 1;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 400;
+  border-radius: 40px;        /* Bordes redondeados tipo "píldora" */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  transition: all 0.2s ease;
+  outline: none;
+  letter-spacing: 0.2px;
+}
+
+.searchInput::placeholder {
+  color: #aaa;
+  font-weight: 400;
+}
+
+.searchInput:focus {
+  border-color: #00e5ff;      /* Acento azul eléctrico (estilo HBO) */
+  background-color: rgba(15, 15, 15, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.2);
+}
+
+/* Botón de búsqueda */
+.searchButton {
+  padding: 12px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #ffffff, #e0e0e0);
+  color: #0f0f0f;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.searchButton:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, #f5f5f5, #ffffff);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.searchButton:active {
+  transform: translateY(1px);
+}
+
+/* Botón de limpiar */
+.clearButton {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.clearButton:active {
+  transform: scale(0.97);
+}
+
+/* ============================================
+   Ajustes responsivos
+   ============================================ */
+@media (max-width: 768px) {
+  .searchBarWrapper {
+    padding: 0 3%;
+    margin: 1rem 0;
+  }
+
+  .searchForm {
+    gap: 8px;
+  }
+
+  .searchInput {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .searchButton,
+  .clearButton {
+    padding: 10px 18px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchForm {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .searchInput {
+    min-width: 100%;
+    order: 1;
+  }
+
+  .searchButton {
+    order: 2;
+    flex: 1;
+  }
+
+  .clearButton {
+    order: 3;
+    flex: 1;
+  }
+}

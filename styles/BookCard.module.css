@@ -1,0 +1,175 @@
+/* ============================================
+   BookCard.module.css
+   Estilo consistente con carrusel HBO/Disney+
+   ============================================ */
+
+/* Tarjeta contenedora (ocupa el 100% del slide) */
+.bookCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;              /* Hereda la altura del slide */
+  background: #0f0f0f;
+  border-radius: 6px;        /* Mismo radio que el carrusel */
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.25s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.bookCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+}
+
+/* Contenedor de la imagen (proporción 2:3) */
+.bookCoverWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;      /* Fuerza la misma proporción que el slide */
+  overflow: hidden;
+  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+}
+
+/* Imagen (next/image) */
+.bookCover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  filter: brightness(0.95);
+}
+
+.bookCard:hover .bookCover {
+  transform: scale(1.02);
+  filter: brightness(1.05);
+}
+
+/* Badges (Premium y Formato) */
+.premiumBadge,
+.fileBadge {
+  position: absolute;
+  top: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.premiumBadge {
+  left: 8px;
+  color: #ffd966;
+}
+
+.fileBadge {
+  right: 8px;
+  color: #00e5ff;
+}
+
+/* Contenido textual */
+.cardContent {
+  padding: 12px 10px;
+  background: #0f0f0f;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cardTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardAuthor {
+  font-size: 0.75rem;
+  color: #b0b0b0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sección de rating */
+.ratingSection {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.starsContainer {
+  display: flex;
+  gap: 2px;
+}
+
+.starFilled {
+  color: #ffc107;
+  font-size: 0.75rem;
+}
+
+.starEmpty {
+  color: #555;
+  font-size: 0.75rem;
+}
+
+.ratingCount {
+  font-size: 0.7rem;
+  color: #888;
+}
+
+/* Placeholder cuando no hay imagen */
+.placeholderCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  color: #aaa;
+}
+
+.placeholderIcon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.placeholderText {
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+/* Ajustes para móviles (opcional, pero coherente) */
+@media (max-width: 768px) {
+  .cardContent {
+    padding: 8px 6px;
+  }
+  .cardTitle {
+    font-size: 0.8rem;
+  }
+  .cardAuthor {
+    font-size: 0.7rem;
+  }
+  .starFilled,
+  .starEmpty {
+    font-size: 0.7rem;
+  }
+  .ratingCount {
+    font-size: 0.65rem;
+  }
+}

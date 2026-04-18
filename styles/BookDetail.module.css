@@ -1,0 +1,343 @@
+/* ============================================
+   BookDetail.module.css
+   Estilo elegante, minimalista y profesional
+   Inspirado en editoriales y plataformas de lectura
+   ============================================ */
+
+.mainContent {
+  max-width: 1100px;
+  margin: 5rem auto;
+  padding: 2rem 2.5rem;
+  background: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+}
+
+/* Enlace de retroceso */
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #000;
+}
+
+/* Layout flexible */
+.detailFlexContainer {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* --- PORTADA --- */
+.coverWrapper {
+  position: relative;
+  flex-shrink: 0;
+  width: 280px;
+ border: 1px solid #eaeaea;
+ border-radius: 2px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.bookCoverLarge {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+
+
+.bookCoverPlaceholder {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  background: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.placeholderIcon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+/* Badges (Premium y Formato) - Estilo sutil */
+.premiumBadgeDetail,
+.fileBadgeDetail {
+  position: absolute;
+  top: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.premiumBadgeDetail {
+  left: 12px;
+  background: #c49b0e;
+}
+
+.fileBadgeDetail {
+  right: 12px;
+  background: #2c7da0;
+}
+
+/* --- CONTENIDO TEXTUAL --- */
+.detailContent {
+  flex: 1;
+  min-width: 240px;
+}
+
+.bookTitle {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.metaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.bookAuthor {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.bookAuthor strong {
+  font-weight: 600;
+  color: #555;
+}
+
+.metaItem {
+  font-size: 0.85rem;
+  color: #666;
+  background: #f5f5f5;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* --- RATING (estrellas + promedio) --- */
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ratingStars {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  color: #f5b342;
+}
+
+.ratingText {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0;
+}
+
+.ratingText span {
+  font-weight: 600;
+  color: #111;
+}
+
+.ratingCount {
+  color: #777;
+  font-size: 0.8rem;
+}
+
+/* --- CATEGORÍAS / TAGS --- */
+.tagsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1rem 0 1.5rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #2c7da0;
+  background: #eef6fc;
+  padding: 4px 12px;
+  border-radius: 30px;
+  transition: all 0.2s;
+}
+
+.tag:hover {
+  background: #e0edf5;
+}
+
+/* --- SINOPSIS --- */
+.synopsisContainer {
+  margin-top: 1.5rem;
+  border-top: 1px solid #eaeaea;
+  padding-top: 1.5rem;
+}
+
+.synopsisTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.synopsisText {
+  line-height: 1.6;
+  color: #2c2c2c;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  white-space: pre-line;
+}
+
+.readMoreButton {
+  background: none;
+  border: none;
+  color: #2c7da0;
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.readMoreButton:hover {
+  color: #1f5e7a;
+  text-decoration: underline;
+}
+
+/* --- BOTÓN DESCARGA --- */
+.downloadCtaWrapper {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eaeaea;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 10px 24px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  border: 1px solid #333;
+}
+
+.downloadButton:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.premiumBtn {
+  background: #c49b0e;
+  border-color: #c49b0e;
+}
+
+.premiumBtn:hover {
+  background: #a07e0b;
+}
+
+.premiumWarning {
+  font-size: 0.8rem;
+  color: #c49b0e;
+  margin-top: 0.5rem;
+  background: #fef7e0;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 850px) {
+  .mainContent {
+    margin: 2rem 1.5rem;
+    padding: 1.5rem;
+  }
+  .detailFlexContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .coverWrapper {
+    width: 220px;
+  }
+  .bookTitle {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  .metaRow {
+    justify-content: center;
+  }
+  .ratingContainer {
+    justify-content: center;
+  }
+  .tagsWrapper {
+    justify-content: center;
+  }
+  .synopsisText {
+    text-align: justify;
+  }
+}
+
+@media (max-width: 480px) {
+  .mainContent {
+    margin: 1rem;
+    padding: 1.2rem;
+  }
+  .bookTitle {
+    font-size: 1.5rem;
+  }
+  .coverWrapper {
+    width: 180px;
+  }
+  .downloadButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
