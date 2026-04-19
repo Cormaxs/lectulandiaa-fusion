@@ -20,6 +20,7 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
 
   useEffect(() => {
     if (isOpen && initialData) {
+    //  console.log('Inicializando formulario con datos:', initialData);
       setFormData({
         titulo: initialData.titulo || '',
         portada: initialData.portada || '',

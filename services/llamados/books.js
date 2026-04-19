@@ -26,7 +26,7 @@ export const fetchBooks = async ({ q = '', page = 1, limit = 12, idioma, anio, f
     const queryString = buildSearchParams({ q, page, limit, idioma, anio, fileType, autor, isPremium, categorias });
     const path = `/books/buscadormejorado?${queryString}`;
     const response = await api.get(path);
-  console.log('Respuesta de fetchBooks:', response.data);
+  //console.log('Respuesta de fetchBooks:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error al obtener o buscar libros:', error);

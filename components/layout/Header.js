@@ -46,7 +46,7 @@ function Header() {
                 <Link href="/" legacyBehavior>
                     <a onClick={closeMenu} className="brand-link">
                         <Image
-                            src="/diseño/logo.png"
+                            src="/logo.webp"
                             alt="SubeTuLibro"
                             className="brand-logo"
                             width={40}

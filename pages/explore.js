@@ -49,6 +49,7 @@ export default function Explore({ booksData, currentPage, totalPages, error, cur
     };
 
     const handleEdit = (book) => {
+        //console.log("Editando libro:", book);
         setEditingBook(book);
         setShowModal(true);
     };

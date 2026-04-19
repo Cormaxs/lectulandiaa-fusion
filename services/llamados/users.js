@@ -14,7 +14,7 @@ export const registerUser = async ({ username, password, email }) => {
 export const loginUser = async ({ username, password }) => {
   try {
     const response = await api.post('/users/login', { username, password });
-    console.log('Respuesta de loginUser:', response.data.user);
+   // console.log('Respuesta de loginUser:', response.data.user);
     return response.data.user;
   } catch (error) {
     const message = error.response?.data?.message || 'Error al iniciar sesión.';

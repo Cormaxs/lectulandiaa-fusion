@@ -49,7 +49,7 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
     };
 
     const handleRating = async (selectedRating) => {
-        if (!user || user.role !== 'user' || hasRated || loadingRating) return; // Solo usuarios 'user' pueden calificar
+       if (!user || (user.role !== 'user' && user.role !== 'admin') || hasRated || loadingRating) return; // Solo usuarios 'user' pueden calificar
 
         setLoadingRating(true);
         setRatingMessage('');
