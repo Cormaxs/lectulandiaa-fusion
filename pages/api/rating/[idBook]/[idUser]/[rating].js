@@ -1,11 +1,11 @@
 // pages/api/rating/[idBook]/[idUser]/[rating].js
-import { ratingService } from '../../../../utils/ratingService';
+import { ratingService } from '../../../../../utils/ratingService.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Método no permitido' });
   }
-
+ 
   const { idBook, idUser, rating } = req.query;
 
   // Validación básica de los parámetros

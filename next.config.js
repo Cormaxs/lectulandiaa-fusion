@@ -1,6 +1,11 @@
+import path from 'path';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Agrega esta línea apuntando a la raíz actual
+  outputFileTracingRoot: process.cwd(), 
+  
   images: {
     remotePatterns: [
       {
