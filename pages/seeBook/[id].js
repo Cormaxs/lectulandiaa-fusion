@@ -241,8 +241,8 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
                         </>
                     )}
                 </div>
-
-                <DownloadButton book={book} />
+                    
+                <DownloadButton book={book} role={user} />
             </main>
 
             <BookFormModal

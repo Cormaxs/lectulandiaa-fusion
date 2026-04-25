@@ -122,3 +122,17 @@
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+
+
+.premiumPrompt {
+    font-size: 1.2rem;
+    color: #cccccc;
+    text-align: center;
+    margin-top: 20px;
+}
+.premiumLink {
+    color: #0070f3;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}

@@ -91,7 +91,9 @@ function Header() {
                                         <div className="avatar-circle">
                                             {user.username?.charAt(0).toUpperCase() || 'U'}
                                         </div>
+                                        <Link href="/profile" legacyBehavior>
                                         <span>{user.username}</span>
+                                        </Link>
                                     </a>
                                 </li>
                                 <li>

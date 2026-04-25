@@ -5,12 +5,16 @@ import styles from '../styles/Home.module.css';
 import { fetchBooks, createBook, updateBook, deleteBook } from '../services/llamados/books';
 import { useState, useEffect } from 'react';
 import BookFormModal from '../components/ui/BookFormModal';
+import Link from 'next/link';
 
 const CAROUSEL_SECTIONS_CONFIG = [
     { key: 'jkRowling', display: 'Libros de J.K. Rowling', params: { autor: 'J.K. Rowling' } },
-    { key: 'novels', display: 'Categoría: Novelas', params: { categorias: 'novelas' } },
+    { key: 'Franz Kafka', display: 'Libros de Franz Kafka', params: { autor: 'Franz Kafka' } },
     { key: 'suspenso', display: 'Libros de Stephen King', params: { autor: 'Stephen King' } },
     { key: 'garciaMarquez', display: 'Libros de Gabriel García Márquez', params: { autor: 'Gabriel García' } },
+    {key: 'Agatha Christie', display: 'Libros de Agatha Christie', params: { autor: 'Agatha Christie' } },
+    {key:'H. P. Lovecraft', display: 'Libros de H. P. Lovecraft', params: { autor: 'H. P. Lovecraft' } },
+    {key:'Isaac Asimov', display: 'Libros de Isaac Asimov', params: { autor: 'Isaac Asimov' } },
 ];
 
 export default function Home({ initialSectionsData }) {
@@ -116,14 +120,17 @@ export default function Home({ initialSectionsData }) {
 
             <main className={styles.mainContent}>
                 <h1 className={styles.header}>
-                    Libros a un click de distancia
+                   Autores Destacados 
                 </h1>
+                
+                <p className={styles.premiumPrompt}>
+    ¿Cansado de los anuncios? 
+    <Link href="/premium" className={styles.premiumLink}>
+         Hazte premium
+    </Link>
+</p>
 
-                <div className={styles.pageInfoContainer}>
-                    <p className={styles.pageInfo}>
-                        Descubre libros destacados por categorías y géneros.
-                    </p>
-                </div>
+                
 
                 {user && user.role === 'admin' && (
                     <div className={styles.adminActionsContainer}>

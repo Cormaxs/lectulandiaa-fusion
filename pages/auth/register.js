@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import Layout from '../../components/layout/Layout';
 import styles from '../../styles/Auth.module.css';
 import { registerUser } from '../../services/llamados/users';
+import { useRouter } from 'next/router'; // 1. Importar router
+
+
 
 export default function Register() {
+    const router = useRouter(); // 2. Inicializar router
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -36,15 +39,22 @@ export default function Register() {
   };
 
   return (
-    <Layout>
+<>
+
+
       <Head>
         <title>Crear Cuenta | Lectulandiaa</title>
         <meta name="description" content="Crea tu cuenta en Lectulandiaa para acceder a miles de libros" />
       </Head>
 
       <main className={styles.main}>
+        
         <div className={styles.authContainer}>
-          <h1>Crear Cuenta</h1>
+          {/* Botón Volver integrado */}
+    <button className={styles.backButton} onClick={() => router.back()}>
+      ← Volver
+    </button>
+          <h1 className='H1'>Crear Cuenta</h1>
 
           <form onSubmit={handleSubmit} className={styles.authForm}>
             <div className={styles.formGroup}>
@@ -107,6 +117,6 @@ export default function Register() {
           </div>
         </div>
       </main>
-    </Layout>
+</>
   );
 }

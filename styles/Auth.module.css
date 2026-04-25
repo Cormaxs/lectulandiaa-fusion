@@ -142,3 +142,33 @@
     font-size: 1.75rem;
   }
 }
+
+/* Nuevo contenedor para alinear botón + formulario */
+.authWrapper {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.backButton {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 10px 0;
+  margin-bottom: 10px;
+  align-self: flex-start;
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.backButton:hover {
+  color: #00d4ff;
+}
+
+/* Ajuste: Si tenías un Layout, asegúrate de no duplicar el <Layout> */
+/* Si usas Layout en Register, quítalo del return si ya lo pusiste arriba, 
+   o mantén el <Layout> envolviendo el <main> */

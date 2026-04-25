@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import Layout from '../../components/layout/Layout';
+import { useRouter } from 'next/router'; // 1. Importar router
 import styles from '../../styles/Auth.module.css';
 import { loginUser } from '../../services/llamados/users';
 
 export default function Login() {
+  
   const [formData, setFormData] = useState({ username: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -49,7 +49,9 @@ export default function Login() {
   };
 
   return (
-    <Layout>
+  
+      <>
+       
       <Head>
         <title>Iniciar Sesión | Lectulandiaa</title>
         <meta name="description" content="Inicia sesión en tu cuenta de Lectulandiaa" />
@@ -57,11 +59,15 @@ export default function Login() {
 
       <main className={styles.main}>
         <div className={styles.authContainer}>
+          {/* Botón Volver integrado */}
+    <button className={styles.backButton} onClick={() => router.back()}>
+      ← Volver
+    </button>
           <h1>Iniciar Sesión</h1>
 
           <form onSubmit={handleSubmit} className={styles.authForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="username">Nombre de usuario o Email</label>
+              <label htmlFor="username">Nombre de usuario</label>
               <input
                 type="text"
                 id="username"
@@ -106,6 +112,6 @@ export default function Login() {
           </div>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }

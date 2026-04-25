@@ -1,13 +1,18 @@
 import { memo } from 'react';
 import styles from '../../../styles/BookDetail.module.css';
 
-const DownloadButton = memo(({ book }) => {
+const DownloadButton = memo(({ book, role }) => {
     if (!book.link) return null;
+    console.log('Rendering DownloadButton for:', book, role);
+  const isAdmin = role?.role === 'admin';
+    const isSubscribed = role?.isSubscribed === true;
 
+    const finalUrl = (isAdmin || isSubscribed) ? book.link : (book.ouo || book.link);
     return (
         <div className={styles.downloadCtaWrapper}>
             <a
-                href={book.link}
+                
+                href={finalUrl}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
                 className={`${styles.downloadButton} ${book.isPremium ? styles.premiumBtn : ''}`}

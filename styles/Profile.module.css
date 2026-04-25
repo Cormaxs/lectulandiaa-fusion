@@ -1,640 +1,114 @@
-/*
-/* Profile Page Styles */
+.profilePage{
+    margin-top: 2rem;
+    background-color: #141414;
+}
+
+.pageWrapper {
+  background-color: #141414;
+  min-height: 100vh;
+  padding: 100px 20px;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 
 .profileContainer {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 0 20px;
-    font-family: 'Inter', -apple-system, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Profile Header */
-.profileHeader {
-    background: white;
-    border-radius: 12px;
-    padding: 40px 30px;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 40px;
 }
 
-.avatarSection {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-}
-
-.avatar {
-    width: 120px;
-    height: 120px;
-    min-width: 120px;
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-}
-
-.userInfo {
-    flex: 1;
-}
-
-.username {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 8px;
-}
-
-.userEmail {
-    font-size: 1rem;
-    color: #6b7280;
-    margin-bottom: 12px;
-}
-
-.memberBadge {
-    display: inline-block;
-    background: #dcfce7;
-    color: #166534;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-}
-
-/* Tabs Navigation */
-.tabsContainer {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #e5e7eb;
-    background: white;
-    border-radius: 12px 12px 0 0;
-    padding: 0;
-    overflow-x: auto;
-}
-
-.tab {
-    flex: 1;
-    padding: 16px 20px;
-    background: none;
-    border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-}
-
-.tab:hover {
-    color: #f97316;
-}
-
-.tabActive {
-    color: #f97316;
-    border-bottom-color: #f97316;
-}
-
-/* Content Sections */
-.section {
-    animation: fadeIn 0.3s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.sectionGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-/* Cards */
+/* Tarjetas estilo Netflix (fondo oscuro, sin sombras, bordes rectos) */
 .card {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+  background-color: #1f1f1f;
+  padding: 30px;
+  border-radius: 4px;
+  margin-bottom: 25px;
 }
 
-.card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+.statusCard {
+  border-left: 5px solid #333; /* Default gris */
 }
 
-.cardTitle {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 20px;
+.active { border-left-color: #e50914; } /* Rojo Netflix si está activo */
+.inactive { border-left-color: #555; }
+
+.label {
+  color: #a3a3a3;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  display: block;
 }
 
-/* Info Grid */
-.infoGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+.value {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  display: block;
 }
 
-.infoItem {
-    padding: 15px;
-    background: #f9fafb;
-    border-radius: 8px;
-    border-left: 3px solid #f97316;
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  background: #e50914;
+  font-size: 0.8rem;
+  font-weight: bold;
+  border-radius: 2px;
+  margin-bottom: 10px;
 }
 
-.infoItem label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #6b7280;
-    margin-bottom: 6px;
-    text-transform: uppercase;
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-.infoItem p {
-    font-size: 1rem;
-    color: #1f2937;
-    font-weight: 600;
+.linkButton {
+  background: none;
+  border: none;
+  color: #e50914; /* Rojo Netflix */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-/* Stats Grid */
-.statsGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+.input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #333;
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 4px;
 }
 
-.stat {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);
-    border-radius: 8px;
-    border: 2px solid #fbbf24;
+.profilePage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px; /* Reduje el 100px para evitar tanto aire arriba */
 }
 
-.statValue {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #f97316;
-    margin-bottom: 8px;
+.profileContainer {
+  max-width: 900px; /* Aumenté el ancho para que no se vea fino */
+  margin: 0 auto;
 }
 
-.statLabel {
-    font-size: 0.9rem;
-    color: #6b7280;
-    font-weight: 600;
+.backButton {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 1rem;
 }
 
-/* Activity List */
-.activityList {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.buttonGroup {
+  display: flex;
+  gap: 15px;
 }
-
-.activityItem {
-    display: flex;
-    gap: 15px;
-    padding: 15px;
-    background: #f9fafb;
-    border-radius: 8px;
-    align-items: flex-start;
-}
-
-.activityIcon {
-    font-size: 1.5rem;
-    min-width: 30px;
-}
-
-.activityItem p {
-    font-size: 0.95rem;
-    color: #1f2937;
-    font-weight: 600;
-    margin-bottom: 4px;
-}
-
-.activityItem small {
-    font-size: 0.85rem;
-    color: #9ca3af;
-}
-
-/* Subscription Card */
-.subscriptionCard {
-    background: white;
-    border-radius: 12px;
-    padding: 40px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-}
-
-.planInfo {
-    border-right: 2px solid #e5e7eb;
-    padding-right: 40px;
-}
-
-.planBadge {
-    display: inline-block;
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    margin: 20px 0;
-}
-
-.planDetails {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin: 30px 0;
-}
-
-.planDetail {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.planDetail span {
-    color: #6b7280;
-    font-weight: 600;
-}
-
-.planDetail strong {
-    color: #1f2937;
-    font-weight: 700;
-}
-
-.planFeatures {
-    display: flex;
-    flex-direction: column;
-}
-
-.planFeatures h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 20px;
-}
-
-.planFeatures ul {
-    list-style: none;
-}
-
-.planFeatures li {
-    padding: 12px 0;
-    color: #374151;
-    font-weight: 500;
-    font-size: 0.95rem;
-}
-
-.planActions {
-    display: flex;
-    gap: 15px;
-    margin-top: 30px;
-}
-
-/* Library Grid */
-.libraryGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-}
-
-.bookCard {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.bookCard:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px);
-}
-
-.bookCover {
-    width: 100%;
-    height: 200px;
-    background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.bookPlaceholder {
-    font-size: 3rem;
-}
-
-.bookInfo {
-    padding: 15px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.bookInfo h4 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #1f2937;
-    margin-bottom: 6px;
-    line-height: 1.3;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-}
-
-.bookAuthor {
-    font-size: 0.85rem;
-    color: #6b7280;
-    margin-bottom: 8px;
-}
-
-.bookRating {
-    font-size: 0.9rem;
-    color: #f97316;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.btnRemove {
-    background: none;
-    border: 2px solid #e5e7eb;
-    padding: 8px 12px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    color: #6b7280;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-weight: 600;
-    margin-top: auto;
-}
-
-.btnRemove:hover {
-    border-color: #f97316;
-    color: #f97316;
-    background: #fef3c7;
-}
-
-/* Buttons */
-.btnPrimary {
-    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-}
-
-.btnPrimary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-}
-
-.btnSecondary {
-    background: white;
-    color: #f97316;
-    padding: 12px 24px;
-    border: 2px solid #f97316;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex: 1;
-}
-
-.btnSecondary:hover {
-    background: #fef3c7;
-}
-
-.btnDanger {
-    background: #fee2e2;
-    color: #dc2626;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex: 1;
-}
-
-.btnDanger:hover {
-    background: #fecaca;
-}
-
-/* Support Section */
-.supportSection {
-    margin-top: 50px;
-}
-
-.supportCard {
-    background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);
-    border: 2px solid #fbbf24;
-    border-radius: 12px;
-    padding: 40px 30px;
-    text-align: center;
-}
-
-.supportCard p {
-    font-size: 1rem;
-    color: #6b7280;
-    margin-bottom: 30px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.supportActions {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .profileContainer {
-        margin: 30px auto;
-        padding: 0 15px;
-    }
-
-    .profileHeader {
-        padding: 25px 20px;
-        margin-bottom: 25px;
-    }
-
-    .avatarSection {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-    }
-
-    .avatar {
-        width: 100px;
-        height: 100px;
-        font-size: 50px;
-    }
-
-    .username {
-        font-size: 1.5rem;
-    }
-
-    .tabsContainer {
-        padding: 0;
-        margin-bottom: 25px;
-    }
-
-    .tab {
-        font-size: 0.9rem;
-        padding: 12px 15px;
-    }
-
-    .sectionGrid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    .infoGrid {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .statsGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-
-    .subscriptionCard {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        padding: 25px;
-    }
-
-    .planInfo {
-        border-right: none;
-        border-bottom: 2px solid #e5e7eb;
-        padding-right: 0;
-        padding-bottom: 25px;
-    }
-
-    .libraryGrid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
-    }
-
-    .bookCard {
-        min-height: 280px;
-    }
-
-    .bookCover {
-        height: 150px;
-    }
-
-    .supportCard {
-        padding: 25px 20px;
-    }
-
-    .supportActions {
-        flex-direction: column;
-    }
-
-    .btnSecondary {
-        width: 100%;
-    }
-
-    .btnDanger {
-        width: 100%;
-    }
-
-    .planActions {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 480px) {
-    .profileHeader {
-        padding: 20px 15px;
-    }
-
-    .username {
-        font-size: 1.3rem;
-    }
-
-    .tab {
-        font-size: 0.8rem;
-        padding: 10px 12px;
-    }
-
-    .card {
-        padding: 15px;
-    }
-
-    .cardTitle {
-        font-size: 1.1rem;
-    }
-
-    .infoItem {
-        padding: 12px;
-    }
-
-    .libraryGrid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .bookInfo {
-        padding: 10px;
-    }
-
-    .bookInfo h4 {
-        font-size: 0.85rem;
-    }
-
-    .supportActions {
-        width: 100%;
-    }
-
-    .btnPrimary,
-    .btnSecondary,
-    .btnDanger {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-    }
-}
-*/
