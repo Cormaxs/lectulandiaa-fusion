@@ -1,6 +1,7 @@
 // components/ui/BookFormModal.js
 import React, { useState, useEffect } from 'react';
-import styles from '../../styles/BookFormModal.module.css'; // Necesitaremos crear este CSS
+import styles from '../../styles/BookFormModal.module.css';
+import { uploadBookFile } from '../../services/llamados/telegram';
 
 const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing }) => {
   const [formData, setFormData] = useState({
@@ -18,9 +19,12 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
     isExclusive: false,
   });
 
+  const [pdfFile, setPdfFile] = useState(null);
+  const [pdfError, setPdfError] = useState('');
+  const [isUploading, setIsUploading] = useState(false);
+
   useEffect(() => {
     if (isOpen && initialData) {
-    //  console.log('Inicializando formulario con datos:', initialData);
       setFormData({
         titulo: initialData.titulo || '',
         portada: initialData.portada || '',
@@ -35,6 +39,9 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
         isPremium: initialData.isPremium || false,
         isExclusive: initialData.isExclusive || false,
       });
+      setPdfFile(null);
+      setPdfError('');
+      setIsUploading(false);
     }
   }, [isOpen, initialData]);
 
@@ -46,9 +53,88 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      setPdfFile(null);
+      setPdfError('');
+      return;
+    }
+
+    if (file.type !== 'application/pdf') {
+      setPdfError('Solo se permiten archivos PDF.');
+      setPdfFile(null);
+      e.target.value = '';
+      return;
+    }
+
+    const maxSize = 19 * 1024 * 1024;
+    if (file.size > maxSize) {
+      setPdfError(`El archivo excede el tamaño máximo de 19 MB (${(file.size / (1024 * 1024)).toFixed(2)} MB).`);
+      setPdfFile(null);
+      e.target.value = '';
+      return;
+    }
+
+    setPdfError('');
+    setPdfFile(file);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    // Si hay un PDF seleccionado, lo subimos junto con todos los datos del libro
+    if (pdfFile) {
+      setIsUploading(true);
+      try {
+        const uploadFormData = new FormData();
+
+        // Añadir el archivo PDF
+        uploadFormData.append('file', pdfFile);
+
+        // Añadir todos los campos del libro al FormData
+        uploadFormData.append('titulo', formData.titulo);
+        uploadFormData.append('autor', formData.autor);
+        uploadFormData.append('portada', formData.portada);
+        uploadFormData.append('sinopsis', formData.sinopsis);
+        uploadFormData.append('link', formData.link);
+        uploadFormData.append('anio', formData.anio);
+        uploadFormData.append('idioma', formData.idioma);
+        uploadFormData.append('fileType', formData.fileType);
+        uploadFormData.append('paginas', formData.paginas);
+        uploadFormData.append('isPremium', formData.isPremium);
+        uploadFormData.append('isExclusive', formData.isExclusive);
+
+        // Las categorías se envían como string (el backend las convertirá a array)
+        uploadFormData.append('categorias', formData.categorias);
+
+        // Enviamos la petición
+        const response = await uploadBookFile(uploadFormData);
+
+        // Verificamos la respuesta (estructura esperada: { success, libro })
+        if (response?.success === true && response?.libro) {
+          // Pasamos el libro completo al padre para que actualice la UI o lo que necesite
+          onSubmit(response.libro);
+          // Cerramos el modal
+          onClose();
+        } else {
+          throw new Error(response?.message || 'Error al procesar el libro');
+        }
+      } catch (error) {
+        console.error('Error al subir PDF y crear libro:', error);
+        setPdfError(error.message || 'Error al subir el archivo. Intenta nuevamente.');
+      } finally {
+        setIsUploading(false);
+      }
+    } else {
+      // No hay PDF: enviamos solo los datos del libro (sin archivo)
+      // Nota: aquí asumimos que el padre manejará la creación/edición normal
+      onSubmit({
+        ...formData,
+        pdfUrl: null,
+      });
+      onClose();
+    }
   };
 
   if (!isOpen) return null;
@@ -80,7 +166,10 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="link">URL de Descarga</label>
-            <input type="url" id="link" name="link" value={formData.link} onChange={handleChange} required />
+            <input type="url" id="link" name="link" value={formData.link} onChange={handleChange} />
+            <small className={styles.helperText}>
+              Si subes un PDF, se ignorará este enlace.
+            </small>
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="anio">Año</label>
@@ -98,6 +187,27 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
             <label htmlFor="paginas">Páginas</label>
             <input type="number" id="paginas" name="paginas" value={formData.paginas} onChange={handleChange} />
           </div>
+
+          <div className={styles.formGroup}>
+            <label htmlFor="pdf">Archivo PDF (opcional, máx. 19 MB)</label>
+            <input
+              type="file"
+              id="pdf"
+              name="pdf"
+              accept="application/pdf"
+              onChange={handleFileChange}
+              className={styles.fileInput}
+              disabled={isUploading}
+            />
+            {pdfError && <span className={styles.errorText}>{pdfError}</span>}
+            {pdfFile && !pdfError && (
+              <span className={styles.fileInfo}>
+                Archivo seleccionado: {pdfFile.name} ({(pdfFile.size / 1024).toFixed(2)} KB)
+              </span>
+            )}
+            {isUploading && <span className={styles.uploadingText}>Subiendo PDF y creando libro, por favor espera...</span>}
+          </div>
+
           <div className={styles.checkboxGroup}>
             <input type="checkbox" id="isPremium" name="isPremium" checked={formData.isPremium} onChange={handleChange} />
             <label htmlFor="isPremium">Es Premium</label>
@@ -106,11 +216,12 @@ const BookFormModal = ({ isOpen, onClose, onSubmit, initialData = {}, isEditing 
             <input type="checkbox" id="isExclusive" name="isExclusive" checked={formData.isExclusive} onChange={handleChange} />
             <label htmlFor="isExclusive">Es Exclusivo</label>
           </div>
+
           <div className={styles.modalActions}>
-            <button type="submit" className={styles.submitButton}>
-              {isEditing ? 'Actualizar Libro' : 'Crear Libro'}
+            <button type="submit" className={styles.submitButton} disabled={isUploading}>
+              {isUploading ? 'Procesando...' : (isEditing ? 'Actualizar Libro' : 'Crear Libro')}
             </button>
-            <button type="button" onClick={onClose} className={styles.cancelButton}>
+            <button type="button" onClick={onClose} className={styles.cancelButton} disabled={isUploading}>
               Cancelar
             </button>
           </div>

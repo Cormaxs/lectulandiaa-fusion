@@ -1,4 +1,5 @@
 // pages/admin/books.js
+/*
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -64,38 +65,29 @@ export default function AdminBooksPage() {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
-    setMessageType('');
+// En pages/admin/books.js
+const handleSubmit = async (bookDataFromModal) => {
+  // bookDataFromModal ya contiene 'link', 'titulo', 'telegramFileId', etc.
+  
+  try {
+    // Si categorias viene como string, conviértelo aquí
+    const dataToSubmit = {
+      ...bookDataFromModal,
+      categorias: typeof bookDataFromModal.categorias === 'string' 
+        ? bookDataFromModal.categorias.split(',').map(c => c.trim()) 
+        : bookDataFromModal.categorias
+    };
 
-    try {
-      const bookData = {
-        ...formData,
-        categorias: formData.categorias.split(',').map((cat) => cat.trim()),
-        anio: parseInt(formData.anio, 10),
-        paginas: parseInt(formData.paginas, 10),
-      };
-
-      if (editingBookId) {
-        await updateBook(editingBookId, bookData);
-        setMessage('Libro actualizado exitosamente.');
-      } else {
-        await createBook(bookData);
-        setMessage('Libro creado exitosamente.');
-      }
-      setMessageType('success');
-      setFormData({
-        titulo: '', portada: '', sinopsis: '', autor: '', categorias: '', link: '',
-        anio: '', idioma: '', fileType: '', paginas: '', isPremium: false, isExclusive: false,
-      });
-      setEditingBookId(null);
-      loadBooks();
-    } catch (error) {
-      setMessage(error.message || 'Error al guardar el libro.');
-      setMessageType('error');
+    if (editingBookId) {
+      await updateBook(editingBookId, dataToSubmit);
+    } else {
+      await createBook(dataToSubmit);
     }
-  };
+    // ... resto del código
+  } catch (err) {
+    console.error("Error al guardar:", err);
+  }
+};
 
   const handleEdit = (book) => {
     setEditingBookId(book._id);
@@ -271,3 +263,4 @@ export default function AdminBooksPage() {
     </Layout>
   );
 }
+*/
