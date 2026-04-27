@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Layout from '../components/layout/Layout';
 import BookCarousel from '../components/features/BookCarousel';
 import styles from '../styles/Home.module.css';
@@ -17,7 +18,7 @@ const CAROUSEL_SECTIONS_CONFIG = [
     {key:'Isaac Asimov', display: 'Libros de Isaac Asimov', params: { autor: 'Isaac Asimov' } },
 ];
 
-export default function Home({ initialSectionsData }) {
+function Home({ initialSectionsData }) {
     const [sectionsData, setSectionsData] = useState(initialSectionsData);
     const [user, setUser] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -84,7 +85,9 @@ export default function Home({ initialSectionsData }) {
         try {
             const processedBookData = {
                 ...bookData,
-                categorias: bookData.categorias.split(',').map((cat) => cat.trim()),
+                categorias: typeof bookData.categorias === 'string' 
+                    ? bookData.categorias.split(',').map((cat) => cat.trim()) 
+                    : bookData.categorias,
                 anio: parseInt(bookData.anio, 10),
                 paginas: parseInt(bookData.paginas, 10),
             };
@@ -93,8 +96,13 @@ export default function Home({ initialSectionsData }) {
                 await updateBook(editingBook._id, processedBookData);
                 setMessage('Libro actualizado exitosamente.');
             } else {
-                await createBook(processedBookData);
-                setMessage('Libro creado exitosamente.');
+                // Si bookData tiene _id, significa que ya fue creado por upload de PDF
+                if (bookData._id) {
+                    setMessage('Libro creado exitosamente.');
+                } else {
+                    await createBook(processedBookData);
+                    setMessage('Libro creado exitosamente.');
+                }
             }
             setMessageType('success');
             setShowModal(false);
@@ -198,3 +206,5 @@ export async function getStaticProps() {
         revalidate: 3600, // Re-generar la página cada hora (o según necesidad)
     };
 }
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

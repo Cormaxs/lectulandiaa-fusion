@@ -107,7 +107,9 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
         try {
             const processedBookData = {
                 ...formData,
-                categorias: formData.categorias.split(',').map((cat) => cat.trim()),
+                categorias: typeof formData.categorias === 'string' 
+                    ? formData.categorias.split(',').map((cat) => cat.trim()) 
+                    : formData.categorias,
                 anio: parseInt(formData.anio, 10),
                 paginas: parseInt(formData.paginas, 10),
             };

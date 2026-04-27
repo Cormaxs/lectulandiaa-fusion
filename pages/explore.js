@@ -79,7 +79,9 @@ export default function Explore({ booksData, currentPage, totalPages, error, cur
         try {
             const processedBookData = {
                 ...bookData,
-                categorias: bookData.categorias.split(',').map((cat) => cat.trim()),
+                categorias: typeof bookData.categorias === 'string' 
+                    ? bookData.categorias.split(',').map((cat) => cat.trim()) 
+                    : bookData.categorias,
                 anio: parseInt(bookData.anio, 10),
                 paginas: parseInt(bookData.paginas, 10),
             };
@@ -88,8 +90,13 @@ export default function Explore({ booksData, currentPage, totalPages, error, cur
                 await updateBook(editingBook._id, processedBookData);
                 setMessage('Libro actualizado exitosamente.');
             } else {
-                await createBook(processedBookData);
-                setMessage('Libro creado exitosamente.');
+                // Si bookData tiene _id, significa que ya fue creado por upload de PDF
+                if (bookData._id) {
+                    setMessage('Libro creado exitosamente.');
+                } else {
+                    await createBook(processedBookData);
+                    setMessage('Libro creado exitosamente.');
+                }
             }
             setMessageType('success');
             setShowModal(false);

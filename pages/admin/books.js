@@ -1,13 +1,13 @@
 // pages/admin/books.js
-/*
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Layout from '../../components/layout/Layout';
 import styles from '../../styles/Admin.module.css';
 import { fetchBooks, createBook, updateBook, deleteBook } from '../../services/llamados/books';
 
-export default function AdminBooksPage() {
+function AdminBooksPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [books, setBooks] = useState([]);
@@ -44,7 +44,7 @@ export default function AdminBooksPage() {
     } else {
       router.push('/auth/login');
     }
-  }, []);
+  }, [router]);
 
   const loadBooks = async () => {
     try {
@@ -263,4 +263,5 @@ const handleSubmit = async (bookDataFromModal) => {
     </Layout>
   );
 }
-*/
+
+export default dynamic(() => Promise.resolve(AdminBooksPage), { ssr: false });

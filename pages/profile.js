@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'; // 1. Importar router
+import dynamic from 'next/dynamic';
 import { updateUser } from '../services/llamados/users.js';
 import styles from '../styles/Profile.module.css';
 import Layout from '../components/layout/Layout.js';
@@ -88,4 +89,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default dynamic(() => Promise.resolve(Profile), { ssr: false });
