@@ -1,7 +1,7 @@
 import { api } from './apiClient';
 
 // Esta es la función que llamará el botón de descarga
-export const getTelegramDownloadLink = async (fileId) => {
+export const getTelegramDownloadLink = async (fileId, ) => {
   try {
     // Esta ruta debe coincidir con la que definas en tu servidor (Express)
     const response = await api.post('/telegram/get-download-link', { fileId, chatId: process.env.TELEGRAM_CHAT_ID });

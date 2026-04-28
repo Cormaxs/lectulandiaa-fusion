@@ -27,18 +27,22 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
-        if (storedUser) {
+        if (storedUser && book && book._id) {
             const parsedUser = JSON.parse(storedUser);
             setUser(parsedUser);
             checkUserRating(parsedUser._id, book._id);
         }
-    }, [book._id]);
+    }, [book]);
 
     const checkUserRating = async (userId, bookId) => {
         try {
             const response = await getUserRatings(userId);
-            const userRatings = response.data;
-            const foundRating = userRatings.find(r => r.book._id === bookId);
+            const userRatings = Array.isArray(response.data) ? response.data : [];
+            const foundRating = userRatings.find((r) => {
+                if (!r || !r.book) return false;
+                const ratingBookId = typeof r.book === 'string' ? r.book : r.book._id || r.book.id;
+                return ratingBookId === bookId;
+            });
             if (foundRating) {
                 setHasRated(true);
                 setCurrentRating(foundRating.rating);
@@ -144,7 +148,7 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
             "name": book.autor
         },
         "description": book.sinopsis,
-        "image": book.portada,
+        "image": book?.portadaCloudinary || book.portada,
         ...(book.averageRating && {
             "aggregateRating": {
                 "@type": "AggregateRating",
@@ -172,14 +176,14 @@ export default function SeeBookPage({ book: initialBook, fullSlug }) {
                 <link rel="canonical" href={canonicalUrl} />
                 <meta property="og:title" content={book.titulo} />
                 <meta property="og:description" content={truncatedDescription} />
-                <meta property="og:image" content={book.portada} />
+                <meta property="og:image" content={book?.portadaCloudinary ||  book.portada} />
                 <meta property="og:url" content={canonicalUrl} />
                 <meta property="og:type" content="book" />
                 <meta property="og:site_name" content="subetulibro.com" />
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={book.titulo} />
                 <meta name="twitter:description" content={truncatedDescription} />
-                <meta name="twitter:image" content={book.portada} />
+                <meta name="twitter:image" content={book?.portadaCloudinary || book.portada} />
                 <script
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }}

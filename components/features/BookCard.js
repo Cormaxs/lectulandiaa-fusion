@@ -19,7 +19,17 @@ const BookCard = ({ book, onEdit, onDelete }) => {
 
     const slug = useMemo(() => createSlug(book.titulo), [book.titulo]);
     const uniqueSlug = useMemo(() => `${slug}-${book._id}`, [slug, book._id]);
-    const decodedPortada = useMemo(() => book.portada ? book.portada.replace(/&amp;/g, '&') : '', [book.portada]);
+    const decodedPortada = useMemo(() => {
+        const portadaUrl = book?.portadaCloudinary || book?.portada || '';
+        return typeof portadaUrl === 'string' ? portadaUrl.replace(/&amp;/g, '&') : '';
+    }, [book.portada, book.portadaCloudinary]);
+    const fileSizeLabel = useMemo(() => {
+        const sizeKb = Number(book?.fileSize);
+        if (!book?.fileSize || Number.isNaN(sizeKb) || !Number.isFinite(sizeKb)) {
+            return null;
+        }
+        return `${(sizeKb / (1024 * 1024)).toFixed(2)} MB`;
+    }, [book.fileSize]);
 
     const renderStars = useMemo(() => (rating = 0) => {
         const stars = [];
@@ -60,6 +70,11 @@ const BookCard = ({ book, onEdit, onDelete }) => {
                         {book.fileType && (
                             <div className={styles.fileBadge}>
                                 {book.fileType.toUpperCase()}
+                                {fileSizeLabel && (
+                                    <span className={styles.fileSizeLabel}>
+                                        {' '}• {fileSizeLabel}
+                                    </span>
+                                )}
                             </div>
                         )}
 

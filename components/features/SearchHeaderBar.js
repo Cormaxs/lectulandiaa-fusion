@@ -58,13 +58,17 @@ const SearchHeaderBar = ({ basePath = '/' }) => {
                     seenIds.add(book._id);
                     const slug = createSlug(book.titulo);
                     const uniqueSlug = `${slug}-${book._id}`;
-                    const decodedPortada = book.portada ? book.portada.replace(/&amp;/g, '&') : '';
+                    const portadaUrl = book?.portadaCloudinary || book?.portada || '';
+                    const decodedPortada = typeof portadaUrl === 'string' ? portadaUrl.replace(/&amp;/g, '&') : '';
+                    const fileSizeMB = book.fileSize ? (Number(book.fileSize) / (1024 * 1024)).toFixed(2) : null;
                     
                     uniqueBooks.push({
                         _id: book._id,
                         titulo: book.titulo,
                         autor: book.autor,
                         portada: decodedPortada,
+                        fileType: book.fileType,
+                        fileSizeMB,
                         slug: uniqueSlug
                     });
                 }
@@ -303,6 +307,13 @@ const SearchHeaderBar = ({ basePath = '/' }) => {
                                         <div className={styles.suggestionContent}>
                                             <div className={styles.suggestionTitle}>{suggestion.titulo}</div>
                                             {suggestion.autor && <div className={styles.suggestionAuthor}>{suggestion.autor}</div>}
+                                            {(suggestion.fileType || suggestion.fileSizeMB) && (
+                                                <div className={styles.suggestionMeta}>
+                                                    {suggestion.fileType && <span>{suggestion.fileType.toUpperCase()}</span>}
+                                                    &nbsp;
+                                                    {suggestion.fileSizeMB && <span>{suggestion.fileSizeMB} MB</span>}
+                                                </div>
+                                            )}
                                         </div>
                                     </button>
                                 </li>

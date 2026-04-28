@@ -8,6 +8,8 @@ const DownloadButton = memo(({ book, role }) => {
 
     const isAdmin = role?.role === 'admin';
     const isSubscribed = role?.isSubscribed === true;
+    const fileSizeMB = book.fileSize ? Number(book.fileSize) / (1024 * 1024) : 0;
+    const isTooLargeForTelegram = fileSizeMB > 19;
 
     // Lógica para el botón de descarga "Directa/Ouo"
     const handleDirectDownload = () => {
@@ -32,9 +34,10 @@ const DownloadButton = memo(({ book, role }) => {
             {book.link && (
                 <button
                     onClick={handleDirectDownload}
-                    className={`${styles.downloadButton} ${book.isPremium ? styles.premiumBtn : ''}`}
+                    className={`${styles.downloadButton} ${book.isPremium ? styles.premiumBtn : styles.primaryBtn}`}
+                    title={`Descargar ${book.titulo} en ${book.fileType || 'PDF'}`}
                 >
-                    Descargar Libro ({book.fileType || 'PDF'})
+                    📥 Descargar Libro ({book.fileType || 'PDF'})
                 </button>
             )}
 
@@ -42,10 +45,17 @@ const DownloadButton = memo(({ book, role }) => {
             {book.telegram?.fileId && (
                 <button
                     onClick={handleTelegramDownload}
-                    className={`${styles.downloadButton} ${styles.telegramBtn || ''}`} // Opcional: crea estilos telegramBtn si quieres otro color
+                    className={`${styles.downloadButton} ${styles.telegramBtn}`}
+                    title={`Descargar respaldo de ${book.titulo} desde Telegram`}
                 >
-                    Descargar respaldo ({book.fileType || 'PDF'})
+                    📱 Descargar respaldo ({book.fileType || 'PDF'})
                 </button>
+            )}
+
+            {book.telegram?.fileId && isTooLargeForTelegram && (
+                <p className={styles.telegramWarning}>
+                    ⚠️ Archivo &gt; 19MB: Puede fallar la descarga desde Telegram.
+                </p>
             )}
 
             {book.isPremium && (
